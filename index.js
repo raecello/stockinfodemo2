@@ -19,7 +19,9 @@ app.post('/stockprice', (request, response) => {
     const parameters = request.body.queryResult.parameters;
     var companyName = parameters['company_name'];
     var priceType = parameters['price_type'];
-    var date = parameters['date'].substr(0, 10);
+    var date = switchdates(parameters['date'].substr(0, 10));
+    console.log(date);
+
     var stockinfo;
     
     var chat;
@@ -65,7 +67,7 @@ function getStockPrice(companyName, priceType, date, response, cloudFnResponse) 
         });
         res.on('end', function() {
             var jsonData = JSON.parse(json);
-            console.log(jsonData);
+            
             var stockPrice = jsonData.data[0].open;
             var chat = "The " + priceType + " price for " + companyName +
             " on " + date + " was " + stockPrice;     
@@ -82,6 +84,13 @@ function getStockPrice(companyName, priceType, date, response, cloudFnResponse) 
     );
     
 }  
+
+function switchdates(date) {
+    var month = date.substring(5,7);
+    var day = date.substring(8,10); 
+    return date.substring(0,5) + day + date.substring(7,8) + month;    
+}
+
 
 
 
