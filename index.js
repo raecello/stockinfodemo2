@@ -65,6 +65,7 @@ function getStockPrice(companyName, priceType, date, response, cloudFnResponse) 
         });
         res.on('end', function() {
             var jsonData = JSON.parse(json);
+            console.log(jsonData);
             var stockPrice = jsonData.data[0].open;
             var chat = "The " + priceType + " price for " + companyName +
             " on " + date + " was " + stockPrice;     
