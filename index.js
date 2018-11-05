@@ -84,6 +84,6 @@ function getStockPrice(companyName, priceType, date, response, cloudFnResponse) 
 
 
 
-app.listen((8000), () => {
+app.listen(process.env.PORT || 5000), () => {
     console.log("Server is up and running...");
-});
+};
